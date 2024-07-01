@@ -53,7 +53,7 @@ const Home = () => {
                     <button className="form__button">Retocar imagen</button>
                 </form>
                 <a href="https://daniels-portafolio.vercel.app/" className="card__footer">
-                    {'<> Daniel Franqui </>'}
+                    <p className="glitch" data-glitch="<> Daniel Franqui </>">{'<> Daniel Franqui </>'}</p>
                 </a>
             </div>
         </div>

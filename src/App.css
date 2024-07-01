@@ -107,6 +107,7 @@
     font-weight: 700;
     color: #00000094;
     text-shadow: 1px 1px 2px #cccacad7;
+    width: 90%;
 }
 
 .loading__borderBar {
@@ -183,7 +184,7 @@
     border-radius: 25px;
     transition: 0.5s all;
     cursor: pointer;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .form__button:hover {
@@ -320,9 +321,9 @@
 
 .card__footer {
     width: 100%;
-    background-color: #ffffff69;
-    color: #00000094;
-    text-shadow: 1px 1px 2px #cccacad7;
+    background-color: #ffffff2d;
+    background-image: url('https://i.gifer.com/BVLZ.gif');
+    background-blend-mode: soft-light;
     padding: 0.8rem;
     font-size: 1.3rem;
     font-style: italic;
@@ -331,9 +332,74 @@
     font-weight: 700;
     text-align: center;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s;
+    border: 1px solid #ffffff34;
 }
 
+.card__footer:hover {
+    background-color: #515151c0;
+    border: 1px solid #ffffffb6;
+}
 
+.glitch {
+    position: relative;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+    z-index: 1;
+    font-family: "Major Mono Display", monospace;
+ }
+ 
+ .glitch:before,
+ .glitch:after {
+    display: block;
+    content: attr(data-glitch);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+ }
+ 
+ .glitch:before {
+    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    color: #00ffdd;
+    z-index: -1;
+ }
+ 
+ .glitch:after {
+    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+    color: #ff0000;
+    z-index: -2;
+ }
+ 
+ @keyframes glitch-color {
+    0% {
+       transform: translate(0);
+    }
+ 
+    20% {
+       transform: translate(-3px, 3px);
+    }
+ 
+    40% {
+       transform: translate(-3px, -3px);
+    }
+ 
+    60% {
+       transform: translate(3px, 3px);
+    }
+ 
+    80% {
+       transform: translate(3px, -3px);
+    }
+ 
+    to {
+       transform: translate(0);
+    }
+ }
 @media screen and (max-width: 999px) {
     .interface__card {
         width: 90%;
@@ -375,5 +441,13 @@
 
     .card__image {
         width: 60%;
+    }
+
+    .dropzone__filename {
+        font-size: 1rem;
+    }
+
+    .glitch {
+        font-size: 1rem;
     }
 }

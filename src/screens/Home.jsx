@@ -40,7 +40,7 @@ const Home = () => {
                 <img src="https://i.gifer.com/7Tf.gif" className="card__image"/>
                 <div {...getRootProps()} className={`dropzone ${isDragActive ? 'dropzone__active' : ''}`}>
                 <input {...getInputProps()} />
-                <p className='dropzone__text'>{isDragActive ? "Suelta el archivo aquí..." : "Arrastra y suelta un archivo aquí, o haz clic para seleccionarlo"}</p>
+                <p className='dropzone__text'>{isDragActive ? "Suelta la foto aquí..." : "Arrastra y suelta una foto de tu cara aquí, o haz clic para seleccionarla"}</p>
                 </div>
                 { selectedFiles?.name && <div className='dropzone__loading'>
                     <p className='dropzone__filename'>{selectedFiles.name}</p>

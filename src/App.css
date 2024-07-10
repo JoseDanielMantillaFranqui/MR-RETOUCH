@@ -23,6 +23,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    min-height: scroll;
     position: relative;
 }
 
@@ -162,6 +163,7 @@
     outline: none;
     transition: 0.5s all;
     border: 2px solid transparent;
+    overflow: hidden;
 }
 
 .form__input:focus {

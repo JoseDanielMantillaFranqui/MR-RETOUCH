@@ -3,7 +3,7 @@ import { useRetouch } from "../hooks/useRetouch";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const { onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, handleCompletedForm, generateRetouchImg } = useRetouch()
+    const { onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, handleCompletedForm, generateRetouchImg, interfaceRef } = useRetouch()
   
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: {   'image/jpeg': [],
         'image/png': [],
@@ -32,7 +32,7 @@ const Home = () => {
     }
 
     return <section className='main__container'>
-        <div className='interface'>
+        <div className='interface' ref={interfaceRef}>
             <div className='interface__card'>
                 <h1 className='card__title'>
                     Mr. Retouch
@@ -49,7 +49,7 @@ const Home = () => {
                     </div>
                 </div>}
                 <form className='form' onSubmit={handleSubmit}>
-                    <textarea placeholder='Describe aquí lo que quieres retocar' cols='1' rows='1' className='form__input' ref={textareaChatRef} value={userPrompt} onChange={handleChangeUserPrompt}></textarea>
+                    <textarea placeholder='Describe aquí la clase de atuendo que quieres llevar y el fondo que quieres que tenga la imagen' cols='1' rows='1' className='form__input' ref={textareaChatRef} value={userPrompt} onChange={handleChangeUserPrompt}></textarea>
                     <button className="form__button">Retocar imagen</button>
                 </form>
                 <a href="https://daniels-portafolio.vercel.app/" className="card__footer">

@@ -3,7 +3,7 @@ import { useRetouch } from "../hooks/useRetouch";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const { onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, handleCompletedForm, generateRetouchImg, interfaceRef } = useRetouch()
+    const { onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, handleCompletedForm, generateRetouchImg} = useRetouch()
   
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: {   'image/jpeg': [],
         'image/png': [],
@@ -32,7 +32,7 @@ const Home = () => {
     }
 
     return <section className='main__container'>
-        <div className='interface' ref={interfaceRef}>
+        <div className='interface'>
             <div className='interface__card'>
                 <h1 className='card__title'>
                     Mr. Retouch

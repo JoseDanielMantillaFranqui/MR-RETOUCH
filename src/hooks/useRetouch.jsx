@@ -63,7 +63,6 @@ const RetouchProvider = ({children}) => {
     const [userPrompt, setUserPrompt] = useState('')
     const [isEmptyUserPrompt, setIsEmptyUserPrompt] = useState(false)
     const textareaChatRef = useRef(null)
-    const interfaceRef = useRef(null)
 
     const validatePromptUser = (value) => {
         const isValid = ((value.length >  0) && (!(value.trim() === ''))) ? true : false 
@@ -77,23 +76,9 @@ const RetouchProvider = ({children}) => {
     }
 
     useEffect(() => {
-      if (textareaChatRef.current.scrollHeight > 60) {
-        textareaChatRef.current.style.height = 'auto';
-        textareaChatRef.current.style.height = `${textareaChatRef.current.scrollHeight}px`;
-    }
-
-    const convertVhToPx = () => {
-      return window.innerHeight
-    };
-
-    const interfaceHeight = convertVhToPx()
-    
-    if (interfaceRef.current.scrollHeight > interfaceHeight) {
-       interfaceRef.current.style.height= `${interfaceRef.current.scrollHeight + 50}px`
-    }
-
     if (userPrompt === '') {
-      interfaceRef.current.style.height= '100vh'
+      textareaChatRef.current.style.height = 'auto';
+      textareaChatRef.current.style.height = `${textareaChatRef.current.scrollHeight}px`;
     }
     },[userPrompt])
 
@@ -163,7 +148,7 @@ const RetouchProvider = ({children}) => {
 
  
 
-    return <RetouchContext.Provider value={{ onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, isFormCompleted, handleCompletedForm, responseImg, generateRetouchImg, interfaceRef  }}>
+    return <RetouchContext.Provider value={{ onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, isFormCompleted, handleCompletedForm, responseImg, generateRetouchImg }}>
         {children}
     </RetouchContext.Provider>
 }

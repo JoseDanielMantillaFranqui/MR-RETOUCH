@@ -37,7 +37,7 @@ const Home = () => {
                 <h1 className='card__title'>
                     Mr. Retouch
                 </h1>
-                <img src="https://i.gifer.com/7Tf.gif" className="card__image"/>
+                <img src="/card-image.gif" className="card__image"/>
                 <div {...getRootProps()} className={`dropzone ${isDragActive ? 'dropzone__active' : ''}`}>
                 <input {...getInputProps()} />
                 <p className='dropzone__text'>{isDragActive ? "Suelta la foto aquí..." : "Arrastra y suelta una foto de tu cara aquí, o haz clic para seleccionarla"}</p>

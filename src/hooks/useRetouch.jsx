@@ -84,7 +84,6 @@ const RetouchProvider = ({children}) => {
 
     const handleIncompletedForm = (errorText) => {
       Swal.fire({
-        title: `Formulario incompleto:`,
         html: errorText,
         confirmButtonText: 'Aceptar',
         customClass: {

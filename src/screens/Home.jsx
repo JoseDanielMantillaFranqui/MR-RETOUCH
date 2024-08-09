@@ -18,12 +18,12 @@ const Home = () => {
         e.preventDefault()
 
         if (uploadProgress !== 'Archivo subido') {
-            handleIncompletedForm('Debes subir una imagen para retocar')
+            handleIncompletedForm('<img class="error__icon" src="https://media.tenor.com/fzCt8ROqlngAAAAM/error-error404.gif"/> <p class="glitch-error" data-glitch="Formulario incompleto:">Formulario incompleto:</p> <br> <p class="glitch-error" data-glitch="Debes subir una imagen para retocar">Debes subir una imagen para retocar</p>')
             return
         }
 
         if (isEmptyUserPrompt === false) {
-            handleIncompletedForm('Debes describir lo que quieres retocar de la imagen subida')
+            handleIncompletedForm('<img class="error__icon" src="https://media.tenor.com/fzCt8ROqlngAAAAM/error-error404.gif"/> <p class="glitch-error" data-glitch="Formulario incompleto:">Formulario incompleto:</p> <br> <p class="glitch-error" data-glitch="Debes describir el atuendo y el fondo que quieres">Debes describir el atuendo y el fondo que quieres</p>')
             return
         }
         handleCompletedForm()

@@ -12,7 +12,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     box-sizing: border-box;
-    background-image: url('https://i.pinimg.com/originals/13/84/38/1384388427f8ff7bf4946da70abc835b.gif');
+    background-image: url('/clothes_background.webp');
 }
 
 .interface {
@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
     border-radius: 25px;
 }
 
@@ -520,6 +520,7 @@
 
     .card__image {
         width: 60%;
+        max-width: 250px;
     }
 
     .dropzone__filename {
@@ -528,5 +529,11 @@
 
     .glitch {
         font-size: 1rem;
+    }
+
+    .main__container {
+        background-position: -80px -100px;
+        background-size: 158%;
+        background-image: url('/clothes-background.webp');
     }
 }

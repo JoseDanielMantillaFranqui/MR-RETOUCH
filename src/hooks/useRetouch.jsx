@@ -22,30 +22,33 @@ const RetouchProvider = ({children}) => {
     const [uploadedFile, setUploadedFile] = useState({});
 
     const uploadToCloudinary = async (file) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', import.meta.env.VITE_PRESET); // Reemplaza con tu upload preset
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', import.meta.env.VITE_PRESET);
     
-        try {
-          setUploading(true);
-          const response = await axios.post(
-            'https://api.cloudinary.com/v1_1/dduz5dnhy/image/upload', // Reemplaza con tu cloud name
-            formData,
-            {
-              onUploadProgress: (progressEvent) => {
-                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                setUploadProgress(percentCompleted);
-              }
+      try {
+        setUploading(true);
+        const response = await axios.post(
+          'https://api.cloudinary.com/v1_1/dduz5dnhy/image/upload',
+          formData,
+          {
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+              setUploadProgress(percentCompleted);
             }
-          );
-          setUploadedFile(response.data);
-        } catch (error) {
-          console.error('Error al subir el archivo:', error);
-        } finally {
-          setUploading(false);
-          setUploadProgress('Archivo subido')
-        }
-      };
+          }
+        );
+        // Reemplazar 'http' por 'https' si es necesario
+        const secureUrl = response.data.url.replace(/^http:\/\//i, 'https://');
+        setUploadedFile({ ...response.data, url: secureUrl });
+      } catch (error) {
+        console.error('Error al subir el archivo:', error);
+      } finally {
+        setUploading(false);
+        setUploadProgress('Archivo subido');
+      }
+    };
+    
 
     useEffect(() => {
         if (selectedFiles?.name) {

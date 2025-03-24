@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const Response = () => {
 
-    const {isFormCompleted, responseImg} = useRetouch()
+    const {isFormCompleted, responseImg, uploadedFile} = useRetouch()
 
     const navigate = useNavigate()
 
@@ -31,8 +31,8 @@ const Response = () => {
                     Mr. Retouch
                 </h1>
                 <div className="response">
-                    {responseImg.output.length > 0 ? <> <img className="response__image" src={responseImg.output[0]} />
-                    <a href={responseImg.output[0]} className="response__download">Descargar Imagen</a>
+                    {responseImg !== '' ? <> <img className="response__image" src={responseImg} />
+                    <a href={responseImg} className="response__download" download={uploadedFile.url.toString()}>Descargar Imagen</a>
                     <a href="/" className="response__goToBack">Volver</a></>
                     :
                     <img src="https://i.gifer.com/AqCa.gif" alt="" className="response__image" />

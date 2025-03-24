@@ -426,13 +426,13 @@
  
  .glitch-error:before {
     animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    color: rgb(84, 252, 230);
+    color: rgb(84, 146, 252);
     z-index: -1;
  }
  
  .glitch-error:after {
     animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-    color: rgb(247, 41, 5);
+    color: rgb(247, 5, 5);
     z-index: -2;
  }
 

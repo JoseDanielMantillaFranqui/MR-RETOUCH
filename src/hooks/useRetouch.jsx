@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useContext, createContext, useRef } f
 import axios from "axios";
 import Swal from "sweetalert2";
 import MonsterApiClient from "monsterapi";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 
 const RetouchContext = createContext()
@@ -51,14 +52,6 @@ const RetouchProvider = ({children}) => {
             uploadToCloudinary(selectedFiles)
         }        
     }, [selectedFiles])
-
-    useEffect(() => {
-        console.log(uploadProgress)
-    }, [uploadProgress])
-
-    useEffect(() => {
-        console.log(uploadedFile.url)
-    }, [uploadedFile])
 
     const [userPrompt, setUserPrompt] = useState('')
     const [isEmptyUserPrompt, setIsEmptyUserPrompt] = useState(false)
@@ -129,25 +122,74 @@ const RetouchProvider = ({children}) => {
       "safe_filter": false
     };
 
-    const [responseImg, setResponseImg] = useState({ output: []})
+    const [responseImg, setResponseImg] = useState('')
+
+    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_G)
+
+    async function generateImage(imageUrl, prompt) {
+      try {
+        // Obtener la imagen desde la URL
+        const response = await fetch(imageUrl);
+        const arrayBuffer = await response.arrayBuffer();
+    
+        // Convertir ArrayBuffer a cadena Base64 (compatible con navegador)
+        let binary = '';
+        const bytes = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64Image = window.btoa(binary);
+    
+        // Preparar el contenido para la API de Gemini
+        const contents = [
+          { text: prompt },
+          {
+            inlineData: {
+              mimeType: "image/png", // Ajusta si la imagen es de otro formato
+              data: base64Image
+            }
+          }
+        ];
+    
+        // Configurar el modelo de generación de imágenes
+        const model = genAI.getGenerativeModel({
+          model: "gemini-2.0-flash-exp-image-generation",
+          generationConfig: {
+            responseModalities: ["Text", "Image"]
+          }
+        });
+    
+        // Generar la imagen con la API de Gemini
+        const apiResponse = await model.generateContent(contents);
+        for (const part of apiResponse.response.candidates[0].content.parts) {
+          if (part.inlineData) {
+            // Convertir la imagen generada de Base64 a una URL utilizable
+            const generatedImageBase64 = part.inlineData.data;
+            const generatedImageUrl = `data:image/png;base64,${generatedImageBase64}`;
+            return generatedImageUrl;
+          }
+        }
+      } catch (error) {
+        console.error("Error generating content:", error);
+        handleErrorMonsterapi(error);
+        return null;
+      }
+    }
+    
 
     const generateRetouchImg = () => {
-         client.generate(model, input)
-    .then((response) => {
-      // Handle the response from the API
-      console.log('Generated content:', response);
-      setResponseImg(response)
-    })
-    .catch((error) => {
-      // Handle API errors
-      console.error('Error:', error);
-      handleErrorMonsterapi(error)
-    });
+      generateImage(uploadedFile.url, userPrompt)
+      .then((imageUrl) => {
+          if (imageUrl) {
+              setResponseImg(imageUrl)
+              // Aquí puedes actualizar el estado en React para mostrar la imagen
+          }
+      });
     }
 
  
 
-    return <RetouchContext.Provider value={{ onDrop, uploadProgress, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, isFormCompleted, handleCompletedForm, responseImg, generateRetouchImg }}>
+    return <RetouchContext.Provider value={{ onDrop, uploadProgress, uploadedFile, selectedFiles, userPrompt, textareaChatRef, handleChangeUserPrompt, handleIncompletedForm, isEmptyUserPrompt, isFormCompleted, handleCompletedForm, responseImg, generateRetouchImg }}>
         {children}
     </RetouchContext.Provider>
 }

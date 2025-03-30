@@ -22,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -36,6 +36,7 @@
     gap: 5px;
     backdrop-filter: blur(3px);
     border-radius: 25px;
+    margin: 2rem 0;
 }
 
 .interface::before {
@@ -198,11 +199,6 @@
     margin-bottom: 0.5rem;
     position: relative;
     transition: all 0.5s;
-}
-
-
-.form__button:hover::before {
-    
 }
 
 .form__button:hover {
